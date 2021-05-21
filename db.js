@@ -15,3 +15,8 @@ sequelize.authenticate().then(
         console.log(`Error: ${err}`);
     }
 )
+
+const User = require('./models/user')(sequelize,Sequelize);
+const Game = require('./models/game')(sequelize,Sequelize);
+
+module.exports = {sequelize, User, Game};

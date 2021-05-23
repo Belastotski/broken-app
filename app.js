@@ -1,13 +1,14 @@
-var express = require('express');
-var db = require('./db').sequelize;
-var user = require('./controllers/usercontroller');
-var game = require('./controllers/gamecontroller')
+const express = require('express');
+const db = require('./db').sequelize;
+const user = require('./controllers/usercontroller');
+const game = require('./controllers/gamecontroller');
 
-var app = express();
+const bodyParser = require('body-parser');
 
-db.sync();
-app.use(express.json());
-app.use(require('body-parser'));
+const app = express();
+
+db.sync({ force: true });
+app.use(bodyParser.json());
 app.use('/api/auth', user);
 app.use(require('./middleware/validate-session'))
 app.use('/api/game', game);
